@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.parita.paginationapp.network.ResultsItem
 
-class RecyclerViewAdapter: PagingDataAdapter<ResultsItem, RecyclerViewAdapter.MyViewHolder>(DiffUtilCallBack()) {
+class RecyclerViewAdapter(private val cl: CharacterClickListener): PagingDataAdapter<ResultsItem, RecyclerViewAdapter.MyViewHolder>(DiffUtilCallBack()) {
 
     override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
+        getItem(position)?.let { holder.bind(it, cl.clickListener) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewAdapter.MyViewHolder {
@@ -28,12 +28,13 @@ class RecyclerViewAdapter: PagingDataAdapter<ResultsItem, RecyclerViewAdapter.My
         val tvImage: ImageView = view.findViewById(R.id.image)
         val itemData: ConstraintLayout = view.findViewById(R.id.item)
 
-        fun bind(data: ResultsItem) {
+        fun bind(data: ResultsItem, clickListener: (ResultsItem) -> Unit) {
             tvName.text = data.name
             tvSpecies.text = data.species
             Glide.with(tvImage).load(data.image).circleCrop().into(tvImage)
             itemData.setOnClickListener{
                 Log.d("TAG", "Rest of the data: ${data.id}, ${data.created}, ${data.episode}")
+                clickListener(data)
             }
         }
     }

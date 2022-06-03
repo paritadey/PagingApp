@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Personal/PaginationApp/app/src/main/res/layout/activity_main.xml" value="0.1921875" />
+        <entry key="..\:/Personal/PaginationApp/app/src/main/res/layout/fragment_character.xml" value="0.1921875" />
+        <entry key="..\:/Personal/PaginationApp/app/src/main/res/layout/fragment_episode.xml" value="0.1921875" />
         <entry key="..\:/Personal/PaginationApp/app/src/main/res/layout/recycler_item.xml" value="0.1" />
         <entry key="..\:/Personal/PaginationApp/app/src/main/res/xml/network_security.xml" value="0.1921875" />
       </map>
