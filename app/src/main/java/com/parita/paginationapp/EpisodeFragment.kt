@@ -3,33 +3,29 @@ package com.parita.paginationapp
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.compose.ui.unit.sp
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
-import com.parita.paginationapp.databinding.FragmentEpisodeBinding
 
 class EpisodeFragment : Fragment() {
 
@@ -44,22 +40,40 @@ class EpisodeFragment : Fragment() {
     ): View? {
         return ComposeView(requireContext()).apply {
             setContent {
-                ImageDemo()
+                CharacterDetailDemo()
             }
         }
     }
 
     @Composable
-    fun ImageDemo() {
+    fun CharacterDetailDemo() {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            arguments?.getString(PaginationConstant.CHARACTER_NAME)?.let { Text(text = it) }
-            Log.d("TAG", "data: ${arguments?.getString(PaginationConstant.CHARACTER_ID)}")
             Spacer(modifier = Modifier.padding(top = 8.dp))
             LoadImageFromURL()
+            Spacer(modifier = Modifier.padding(top = 2.dp))
+            CharacterDetails(data = "Character Details", characterType = "NONE")
+            Spacer(modifier = Modifier.padding(top = 4.dp))
+            arguments?.getString(PaginationConstant.CHARACTER_NAME)?.let { CharacterDetails(it, PaginationConstant.CHARACTER_NAME) }
+            Spacer(modifier = Modifier.padding(top = 8.dp))
+            arguments?.getString(PaginationConstant.CHARACTER_SPECIES)?.let { CharacterDetails(it, PaginationConstant.CHARACTER_SPECIES) }
+            Spacer(modifier = Modifier.padding(top = 8.dp))
+            arguments?.getString(PaginationConstant.CHARACTER_CREATED)?.let { CharacterDetails(it, PaginationConstant.CHARACTER_CREATED) }
+        }
+    }
+
+    @Composable
+    fun CharacterDetails(data: String, characterType: String) {
+        when {
+            characterType.equals(PaginationConstant.CHARACTER_NAME) -> Text("Name : $data", color = Color.Black, fontSize = 16.sp)
+            characterType.equals(PaginationConstant.CHARACTER_SPECIES) -> Text("Species : $data", color = Color.Black, fontSize = 16.sp)
+            characterType.equals(PaginationConstant.CHARACTER_CREATED) -> Text("Created : $data", color = Color.Black, fontSize = 16.sp)
+            else -> Text(text = data, color=Color.Blue, fontSize = 18.sp)
         }
     }
 
@@ -78,7 +92,15 @@ class EpisodeFragment : Fragment() {
                 }
             })
         val value = bitmap.value
-        if(value!=null) Image(value.asImageBitmap(), contentDescription = "character image", Modifier.fillMaxWidth())
+        if (value != null) Image(
+            value.asImageBitmap(),
+            contentDescription = "character image",
+            Modifier
+                .fillMaxWidth()
+                .height(400.dp)
+                .padding(24.dp),
+            contentScale = ContentScale.Crop,
+        )
         else Text("Loading image...")
     }
 }
