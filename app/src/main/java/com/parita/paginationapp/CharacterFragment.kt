@@ -51,7 +51,7 @@ class CharacterFragment : Fragment() {
             addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
              recyclerViewAdapter = RecyclerViewAdapter(CharacterClickListener {
                  mBundle.putString(CHARACTER_ID, it.id)
-                 mBundle.putString(CHARACTER_NAME, it.image)
+                 mBundle.putString(CHARACTER_NAME, it.name)
                  mBundle.putString(CHARACTER_IMAGE, it.image)
                  mBundle.putString(CHARACTER_SPECIES, it.species)
                  mBundle.putString(CHARACTER_CREATED, it.created)
