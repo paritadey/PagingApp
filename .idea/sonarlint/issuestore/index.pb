@@ -22,11 +22,11 @@ X
 Lapp/src/androidTest/java/com/parita/paginationapp/ExampleInstrumentedTest.kt,f\2\f2fd8a0107eeea5459ebce036b89437d95472b5d
 m
 =app/src/test/java/com/parita/paginationapp/ExampleUnitTest.kt,7\d\7de7031c5a052ab0ec5e0da29a25c573b3668796
-k
-;app/src/main/java/com/parita/paginationapp/MainViewModel.kt,9\9\990b8deb1b1dbc19876a4925e52a01b58b6088fb
 n
 >app/src/main/java/com/parita/paginationapp/DiffUtilCallBack.kt,8\3\830dc2c453189df99bac2954dce210e7dd759a91
 s
 Capp/src/main/java/com/parita/paginationapp/CharacterPagingSource.kt,a\8\a8233e85920ad91a43b5051d0d01eba3e7068bce
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+p
+@app/src/main/java/com/parita/paginationapp/PaginationConstant.kt,8\8\880a4e29969fd43e9665a4e2dac1d01e314775d9
