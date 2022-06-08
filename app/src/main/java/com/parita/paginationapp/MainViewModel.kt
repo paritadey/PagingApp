@@ -12,7 +12,7 @@ import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
 class MainViewModel : ViewModel() {
-    lateinit var retroService : RetroService
+    var retroService : RetroService
 
     init {
         retroService = RetroInstance.getRetrofitInstance().create(RetroService::class.java)

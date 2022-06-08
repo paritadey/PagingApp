@@ -1,11 +1,11 @@
 package com.parita.paginationapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -19,7 +19,7 @@ import com.parita.paginationapp.PaginationConstant.CHARACTER_NAME
 import com.parita.paginationapp.PaginationConstant.CHARACTER_SPECIES
 import com.parita.paginationapp.databinding.FragmentCharacterBinding
 import kotlinx.coroutines.flow.collectLatest
-import java.util.ArrayList
+
 
 class CharacterFragment : Fragment() {
     private lateinit var recyclerViewAdapter: RecyclerViewAdapter
@@ -46,16 +46,18 @@ class CharacterFragment : Fragment() {
     private fun initRecyclerView(){
         val mBundle = Bundle()
         val mFragment = EpisodeFragment()
+        val list: ArrayList<String> = ArrayList()
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
              recyclerViewAdapter = RecyclerViewAdapter(CharacterClickListener {
+                 it.episode.let { it1 -> list.addAll(it1) }
                  mBundle.putString(CHARACTER_ID, it.id)
                  mBundle.putString(CHARACTER_NAME, it.name)
                  mBundle.putString(CHARACTER_IMAGE, it.image)
                  mBundle.putString(CHARACTER_SPECIES, it.species)
                  mBundle.putString(CHARACTER_CREATED, it.created)
-                 mBundle.putStringArrayList(CHARACTER_EPISODE, it.episode as ArrayList<String>?)
+                 mBundle.putStringArrayList(CHARACTER_EPISODE, list)
                  mFragment.arguments = mBundle
                  val transaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction() as FragmentTransaction
                  transaction.replace(R.id.frame_container, mFragment).addToBackStack(null).commit()
@@ -64,6 +66,7 @@ class CharacterFragment : Fragment() {
         }
 
     }
+
     private fun initViewModel() {
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         lifecycleScope.launchWhenCreated {

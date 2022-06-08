@@ -1,6 +1,5 @@
 package com.parita.paginationapp
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +32,6 @@ class RecyclerViewAdapter(private val cl: CharacterClickListener): PagingDataAda
             tvSpecies.text = data.species
             Glide.with(tvImage).load(data.image).circleCrop().into(tvImage)
             itemData.setOnClickListener{
-                Log.d("TAG", "Rest of the data: ${data.id}, ${data.created}, ${data.episode}")
                 clickListener(data)
             }
         }
