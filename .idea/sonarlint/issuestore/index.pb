@@ -22,7 +22,7 @@ m
 =app/src/test/java/com/parita/paginationapp/ExampleUnitTest.kt,7\d\7de7031c5a052ab0ec5e0da29a25c573b3668796
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+m
+=app/src/main/java/com/parita/paginationapp/EpisodeFragment.kt,7\8\78a07528aa94ca1eebc1fa5d95a239cd6596d8ef
